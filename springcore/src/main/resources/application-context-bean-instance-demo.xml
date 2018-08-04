@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:contex="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 构造方法实例化 -->
+    <bean id="circular" class="com.lwstudy.springcore.common.impl.Circular">
+        <constructor-arg name="radius" value="20"/>
+    </bean>
+
+    <!-- 静态方法实例化 -->
+    <bean id="clientService" class="com.lwstudy.springcore.instance.ClientService"
+          factory-method="getInstance" />
+
+    <!-- 实例工厂方法 -->
+    <bean id="serviceLocator" class="com.lwstudy.springcore.instance.DefaultServiceLocator"/>
+
+    <bean id="clientService2" factory-bean="serviceLocator"
+          factory-method="createClientServiceInstance"/>
+</beans>
