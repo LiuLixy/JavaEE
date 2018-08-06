@@ -12,6 +12,17 @@
         <constructor-arg name="radius" value="20"/>
     </bean>
 
+    <bean id="rectangle" class="com.lwstudy.springcore.common.impl.Rectangle">
+        <constructor-arg name="width" value="10"/>
+        <constructor-arg name="height" value="20"/>
+    </bean>
+
+    <bean id="triangle" class="com.lwstudy.springcore.common.impl.Triangle">
+        <constructor-arg name="a" value="3"/>
+        <constructor-arg name="b" value="4"/>
+        <constructor-arg name="c" value="5"/>
+    </bean>
+
     <!-- 静态方法实例化 -->
     <bean id="clientService" class="com.lwstudy.springcore.instance.ClientService"
           factory-method="getInstance" />
@@ -21,4 +32,117 @@
 
     <bean id="clientService2" factory-bean="serviceLocator"
           factory-method="createClientServiceInstance"/>
+
+    <!-- Bean 的装配 -->
+    <!-- Bean 的引用 -->
+    <bean id="bar" class="com.lwstudy.springcore.assemble.Bar"/>
+    <bean id="baz" class="com.lwstudy.springcore.assemble.Baz"/>
+    <bean id="foo" class="com.lwstudy.springcore.assemble.Foo">
+        <constructor-arg ref="bar"/>
+        <constructor-arg ref="baz"/>
+    </bean>
+
+    <!-- 根据参数类型 -->
+    <bean id="foo1" class="com.lwstudy.springcore.assemble.Foo">
+        <constructor-arg type="com.lwstudy.springcore.assemble.Baz" ref="baz"/>
+        <constructor-arg type="com.lwstudy.springcore.assemble.Bar" ref="bar"/>
+    </bean>
+
+    <bean id="exampleBean" class="com.lwstudy.springcore.assemble.ExampleBean">
+        <constructor-arg type="int" value="20"/>
+        <constructor-arg type="java.lang.String" value="zhangsan"/>
+    </bean>
+
+    <!-- 根据参数位置 -->
+    <bean id="exampleBean2" class="com.lwstudy.springcore.assemble.ExampleBean">
+        <constructor-arg index="0" value="25"/>
+        <constructor-arg index="1" value="lisi"/>
+    </bean>
+
+    <!-- 根据参数名称 -->
+    <bean id="exampleBean3" class="com.lwstudy.springcore.assemble.ExampleBean">
+        <constructor-arg name="age" value="26"/>
+        <constructor-arg name="name" value="wangwu"/>
+    </bean>
+
+    <!-- Setter 方法装配 -->
+    <bean id="xmlShapeCompute" class="com.lwstudy.springcore.xml.XmlShapeCompute">
+        <property name="circular" ref="circular"/>
+    </bean>
+    
+    <!-- 直接赋值装配 基本类型和String -->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/memo"/>
+        <property name="username" value="root"/>
+        <property name="password" value="xyxy"/>
+        <property name="maxTotal" value="20"/>
+    </bean>
+
+    <!-- idref -->
+    <!--
+        idref装配的是目标bean的id而不是目标bean的实例，
+        同时使用idref容器在部署的时候还会验证这个名称的
+        bean是否真实存在。其实idref就跟value一样，只是
+        将某个字符串装配到属性或者构造函数中，只不过装配
+        的是某个Bean定义的id属性值。
+    -->
+    <bean id="barId" class="com.lwstudy.springcore.assemble.Bar"/>
+    <bean id="idRefExample" class="com.lwstudy.springcore.assemble.IdRefExample">
+        <constructor-arg>
+            <idref bean="barId"/>
+        </constructor-arg>
+    </bean>
+
+    <!-- 内部 Bean -->
+    <bean id="xmlShapeCompute2" class="com.lwstudy.springcore.xml.XmlShapeCompute">
+        <property name="circular" ref="circular"/>
+        <property name="rectangle" ref="rectangle"/>
+        <property name="triangle">
+            <!-- Inner Bean -->
+            <bean class="com.lwstudy.springcore.common.impl.Triangle">
+                <constructor-arg name="a" value="10"/>
+                <constructor-arg name="b" value="24"/>
+                <constructor-arg name="c" value="30"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- Collection -->
+    <bean id="complexObject" class="com.lwstudy.springcore.assemble.ComplexObject">
+        <property name="properties">
+            <props>
+                <prop key="zhangsan">zhangsan@email.com</prop>
+                <prop key="lisi">lisi@email.com</prop>
+            </props>
+        </property>
+        <property name="list">
+            <list>
+                <value>Java</value>
+                <ref bean="foo"/>
+                <value>20</value>
+            </list>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="zhangsan" value="zhangsan@email.com"/>
+                <entry key="lisi" value-ref="foo1"/>
+            </map>
+        </property>
+        <property name="set">
+            <set>
+                <value>20</value>
+                <value>Java</value>
+                <value>JavaScript</value>
+            </set>
+        </property>
+    </bean>
+
+    <!-- null 和 空字符串 -->
+    <bean id="exampleBean22" class="com.lwstudy.springcore.assemble.ExampleBean2">
+        <property name="email" value=""/>
+        <property name="name">
+            <null/>
+        </property>
+    </bean>
 </beans>

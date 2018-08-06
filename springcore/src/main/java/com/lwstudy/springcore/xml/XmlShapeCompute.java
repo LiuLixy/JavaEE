@@ -41,4 +41,13 @@ public class XmlShapeCompute {
     public void setTriangle(Shape triangle) {
         this.triangle = triangle;
     }
+
+    @Override
+    public String toString() {
+        return "XmlShapeCompute{" +
+                "circular=" + circular +
+                ", rectangle=" + rectangle +
+                ", triangle=" + triangle +
+                '}';
+    }
 }
