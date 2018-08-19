@@ -145,4 +145,16 @@
             <null/>
         </property>
     </bean>
+
+    <!-- 延迟初始化 -->
+    <bean id="lazyExampleBean" class="com.lwstudy.springcore.assemble.LazyExampleBean" lazy-init="true"/>
+
+    <!-- 自动装配 -->
+    <bean id="customer" class="com.lwstudy.springcore.assemble.Customer" autowire="constructor"/>
+
+    <bean id="customer2" class="com.lwstudy.springcore.assemble.Customer2" autowire="byName"/>
+
+    <bean id="customer3" class="com.lwstudy.springcore.assemble.Customer2" autowire="byType"/>
+
+
 </beans>
