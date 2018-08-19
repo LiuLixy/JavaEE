@@ -59,5 +59,19 @@ public class IoCXmlApplication {
         ExampleBean2 exampleBean22 = (ExampleBean2) context.getBean("exampleBean22");
         // 需要调试才能看出结果
         System.out.println(exampleBean22);
+
+        // 需要 Debug 执行才能看出延迟初始化
+        LazyExampleBean lazyExampleBean = (LazyExampleBean) context.getBean("lazyExampleBean");
+        System.out.println(lazyExampleBean);
+
+        // 自动装配
+        Customer customer = (Customer) context.getBean("customer");
+        System.out.println(customer);
+
+        Customer2 customer2 = (Customer2) context.getBean("customer2");
+        System.out.println(customer2);
+
+        Customer2 customer3 = (Customer2) context.getBean("customer3");
+        System.out.println(customer3);
     }
 }
