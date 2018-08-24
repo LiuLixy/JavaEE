@@ -16,18 +16,19 @@
         <property name="number" value="#{T(java.lang.Math).random()}"/>
     </bean>
 
-    <!--<bean id="systemPropertiesBean" class="com.lwstudy.springcore.spel.SystemPropertiesBean">-->
-    <!--<property name="classPath" value="#{systemProperties['java.class.path']}"/>-->
-    <!--<property name="javaHome" value="#{systemProperties['java.home']}"/>-->
-    <!--<property name="javaVersion" value="#{systemProperties['java.version']}"/>-->
-    <!--<property name="osName" value="#{systemProperties['os.name']}"/>-->
-    <!--</bean>-->
+    <bean id="systemPropertiesBean" class="com.lwstudy.springcore.spel.SystemPropertiesBean">
+    <property name="classPath" value="#{systemProperties['java.class.path']}"/>
+    <property name="javaHome" value="#{systemProperties['java.home']}"/>
+    <property name="javaVersion" value="#{systemProperties['java.version']}"/>
+    <property name="osName" value="#{systemProperties['os.name']}"/>
+    </bean>
 
-    <!--<bean id="systemEnvironmentBean" class="com.lwstudy.springcore.spel.SystemEnvironmentBean">-->
-    <!--<property name="appData" value="#{systemEnvironment['APPDATA']}"/>-->
-    <!--<property name="path" value="#{systemEnvironment['Path']}"/>-->
-    <!--<property name="systemDriver" value="#{systemEnvironment['SystemDrive']}"/>-->
-    <!--</bean>-->
+    <bean id="systemEnvironmentBean" class="com.lwstudy.springcore.spel.SystemEnvironmentBean">
+    <property name="appData" value="#{systemEnvironment['APPDATA']}"/>
+    <property name="path" value="#{systemEnvironment['Path']}"/>
+    <property name="systemDrive" value="#{systemEnvironment['SystemDrive']}"/>
+    </bean>
+
 
 
 </beans>
