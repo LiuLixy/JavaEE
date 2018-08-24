@@ -41,7 +41,7 @@ public class SpelCollectionApplication {
         System.out.println(mapVal);
 
         Map mapVal2 = parser.parseExpression("{username:'zhangsan', age:22, " +
-                "placeOfBirth:{nation:'China', district:'XiAn'}}").getValue(Map.class);
+                "placeOfBirth:{nation:'China', district:'Xi’an'}}").getValue(Map.class);
         System.out.println(mapVal2);
         System.out.println(mapVal2.get("username"));
         System.out.println(mapVal2.get("placeOfBirth"));
