@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:contex="http://www.springframework.org/schema/context"
+       xmlns:context="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 数据源 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
+            destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClass}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+
+        <!-- 连接池的连接配置 -->
+        <property name="initialSize" value="10"/>
+        <property name="maxActive" value="20"/>
+        <!-- 最小空闲数 -->
+        <property name="minIdle" value="10"/>
+        <property name="queryTimeout" value="5"/>
+
+        <!-- 获取连接等待超时时间 -->
+        <property name="maxWait" value="10000"/>
+        <!-- 间隔多久检查一次，检测需要关闭的连接 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <!-- 一个连接在池中的最小生存时间 -->
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+
+    </bean>
+
+    <!-- 使用 Spring JDBC Template -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+        <!--<property name="url" value="${jdbc.url}"/>-->
+        <!--<property name="driverClassName" value="${jdbc.driverClass}"/>-->
+        <!--<property name="username" value="${jdbc.username}"/>-->
+        <!--<property name="password" value="${jdbc.password}"/>-->
+    <!--</bean>-->
+
+</beans>
